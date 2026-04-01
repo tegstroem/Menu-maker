@@ -1,79 +1,161 @@
-@import url('https://fonts.googleapis.com/css2?family=Nabla&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sirin+Stencil&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
 
-.nabla{
-  font-family: "Nabla", system-ui;
-  color: #084223;
-  font-optical-sizing: auto;
+/* FONTS */
+
+.sirin-stencil-regular {
+  font-family: "Sirin Stencil", sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-variation-settings:
-    "EDPT" 0,
-    "EHLT" 24;
 }
 
-:root {
-
-  --bg: #fff;
-  --code-bg: #f4f3ec;
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+.dm-mono-regular {
+  font-family: "DM Mono", monospace;
+  font-weight: 400;
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+.dm-mono-regular {
+  font-family: "DM Mono", monospace;
+  font-weight: 400;
+  font-style: italic;
 }
+
+.leckerli-one-regular {
+  font-family: "Leckerli One", cursive;
+  font-weight: 200;
+  font-style: normal;
+}
+
+
+/* BACKGROUND */
 
 body {
   margin: 0;
-  background-image: url(./Background.png);
-  background-repeat:no-repeat;
-  background-size: 100%;
+  padding: 0;
+  background-image: url(./files/Background.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  min-height: 100svh;
+html {
+  width: 100%;
+  height: 100%;
+}
+
+/* TEXT */
+
+header {
   display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  margin: 0;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 2em;
 }
 
 h1 {
-  font-family: Nabla;
+  font-family: "Leckerli One";
+  font-size: 3em;
   font-weight: 500;
-  color: rgb(9, 67, 29);
+  color:#073c23;
+  text-align: left;
+}
+
+header h1 {
+  margin-right: auto;
+}
+
+header h2 {
+  margin-right: 3rem;
+}
+
+header h2 {
+  font-family: "Leckerli One";
+  font-size: 2em;
+  font-weight: 500;
+  color:#073c23;
+  text-align: right;
+  gap: 6em;
+
+}
+
+h3 {
+  font-family: "DM Mono", monospace;
+  color:#1D4E34;
+}
+
+p {
+  font-family: "DM Mono", monospace;
+  color:#1D4E34;
+}
+
+/* PARTS */
+
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 1rem;
+  justify-content: center;
+  flex-wrap: nowrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+section {
+  background-color: #FFEFDB;
+  border:#1D4E34 2px solid;
+  border-radius: 10px;
+  gap: 2rem;
+  padding: 1rem;
+  flex: 1;
+  justify-self: center;
+}
+
+.Recipeform {
+  flex: 1;
+}
+
+.Recipesearch {
+  flex: 1;
+}
+
+button {
+  font-family: "DM Mono", monospace;
+  color: #FFEFDB;
+  background-color: #1D4E34;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+}
+
+div {
+  padding: 1em;
+}
+
+/* Mobile version */
+@media only screen and (max-width: 500px) {
+  .sections-container {
+    flex-direction: column;
+  }
+
+  .Recipeform,
+  .Recipesearch {
+    width: 100%;
+  }
+
+  body {
+    background-image: url(./Background.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+  }
 }

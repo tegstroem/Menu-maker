@@ -1,0 +1,97 @@
+/*CSS FOR FORM*/
+
+.form {
+  background-color: #FFEFDB;
+  width:20rem;
+  padding: 2rem;
+  margin: 1rem;
+  display: grid;
+  gap: 1rem;
+  border-radius: 10px;
+  justify-self: center;
+}
+
+.form input {
+  font-family: "DM Mono", monospace;
+  color:#1D4E34;  
+  font-size: 0.7em;
+  background-color: #FFEFDB;
+  border-radius: 10px;
+  padding: 1rem 3rem;
+  border:#1D4E34 2px solid;
+}
+
+.input {
+  font-family: "DM Mono", monospace;
+  color: #1D4E34;  
+  font-size: 0.7em;
+  background-color: #FFEFDB;
+  border-radius: 10px;
+  padding: 1rem 2rem;
+  border: #1D4E34 2px solid;
+}
+
+/* Style the select dropdown */
+select.input {
+  cursor: pointer;
+  background-position: right 0.5rem center;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+}
+
+/* Style the dropdown options */
+select.input option {
+  background-color: #FFEFDB;
+  color: #1D4E34;
+  padding: 0.5rem;
+  font-family: "DM Mono", monospace;
+}
+
+select.input option:hover {
+  background-color: #1D4E34;
+  color: #FFEFDB;
+}
+
+button {
+  font-family: "DM Mono", monospace;
+  color: #FFEFDB;
+  background-color: #1D4E34;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  border:#1D4E34 2px solid;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 1em;
+  color:#1D4E34;
+  font-family: "DM Mono", monospace;
+  color:#1D4E34;
+}
+
+p {
+  font-family: "DM Mono", monospace;
+  color:#1D4E34;
+}
+
+.input::placeholder {
+  color: #1D4E34;
+  opacity: 0.7;
+}
+
+.formTitle {
+  font-family: "DM Mono", monospace;
+  color: #1D4E34;
+  text-align: center;
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+/* Mobile version */
+@media only screen and (max-width: 500px) {
+  .form {
+    margin: 2rem;
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}

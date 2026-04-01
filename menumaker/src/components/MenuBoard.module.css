@@ -1,0 +1,109 @@
+/*CSS FOR MENUBOARD*/
+
+.container {
+  display: flex;
+  margin: 0 auto;
+  column-gap: 1em;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2rem;
+  max-width: 1400px;
+}
+
+.dayColumn {
+  background-color: #1D4E34;
+  border:#104027 2px solid;  
+  padding: 10px;
+  width: 9em;
+  max-height: fit-content;
+  border-radius: 10px;
+}
+
+h2 {
+  font-family: "DM Mono", monospace;
+  font-size: 1.3em;
+  color: #FFEFDB;
+  text-align: center;
+  gap: 6em;
+}
+
+h3 {
+font-family: "DM Mono", monospace;
+font-size: 1em;
+margin: 0;
+
+}
+
+h4 {
+  font-family: "DM Mono", monospace;
+  font-style: italic;
+  font-size: 0.7em;
+  margin: 0;
+}
+
+p {
+  font-size: 0.6em;
+}
+
+.recipeItem {
+  background-color: #FFEFDB;
+  border: #1D4E34 1px solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipeItem button {
+  font-size: 0.5em;
+  padding: 0.2rem 0.5rem;
+  font-family: "DM Mono", monospace;
+  color: #FFEFDB;
+  background-color: #1D4E34;
+  position: relative;
+  margin-top: 0.5em;
+  
+}
+
+input {
+  font-size: 0.5em;
+  background-color: #FFEFDB;
+  color: #1D4E34;
+  border: #1D4E34 1px solid;
+  border-radius: 10px;
+  padding: 0.8em;
+  display: flex;
+  padding: 0.2rem 0.5rem;
+  font-family: "DM Mono", monospace;
+}
+
+img {
+  border: #1D4E34 1px solid;
+  border-radius: 10px;
+  margin: 0.2em;
+}
+
+.shortDescription {
+  font-size: 0.75em;
+  margin: 0.5rem 0;
+  line-height: 1.3;
+}
+
+.ingredients {
+  font-size: 0.7em;
+  margin: 0.3rem 0;
+}
+
+.expandBtn {
+  font-size: 0.7em;
+  padding: 0.3rem 0.5rem;
+  background-color: #1D4E34;
+  color: #FFEFDB;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+
+.expandBtn:hover {
+  background-color: #073c23;
+}
