@@ -31,7 +31,7 @@
   border: #1D4E34 2px solid;
 }
 
-/* Style the select dropdown */
+
 select.input {
   cursor: pointer;
   background-position: right 0.5rem center;
@@ -39,7 +39,7 @@ select.input {
   padding-right: 2.5rem;
 }
 
-/* Style the dropdown options */
+
 select.input option {
   background-color: #FFEFDB;
   color: #1D4E34;

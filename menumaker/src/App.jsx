@@ -68,14 +68,19 @@ function HomePage({ recipes, setRecipes, menus, setMenus }) {
     setRecipes([...recipes, newRecipe]);
   };
 
-  const deleteRecipe = (id) => {
-    // Only remove from current menu display, NOT from recipes collection
-    setRecipes(recipes.filter(recipe => recipe.id !== id));
+  
+  const removeFromMenu = (id) => {
+    const updatedRecipes = recipes.map(recipe =>
+      recipe.id === id ? { ...recipe, day: "" } : recipe
+    );
+    setRecipes(updatedRecipes);
   };
 
-  const removeFromMenu = (id) => {
-    // This removes from the MenuBoard view only
-    // Recipe stays in recipes collection
+
+  const deleteRecipe = (id) => {
+    const updatedRecipes = recipes.filter(recipe => recipe.id !== id);
+    setRecipes(updatedRecipes);
+    localStorage.setItem("recipes", JSON.stringify(updatedRecipes));
   };
 
   const editRecipe = (id, updatedRecipe) => {
@@ -140,7 +145,11 @@ function HomePage({ recipes, setRecipes, menus, setMenus }) {
       <button onClick={saveMenu} style={{ margin: "2rem auto", display: "block", padding: "0.75rem 2rem" }}>
         Save Menu
       </button>
-      <MenuBoard recipes={recipes} onDelete={removeFromMenu} onEdit={editRecipe} />
+      <MenuBoard 
+        recipes={recipes} 
+        onDelete={removeFromMenu}  
+        onEdit={editRecipe} 
+      />
     </DragDropContext>
   );
 }
