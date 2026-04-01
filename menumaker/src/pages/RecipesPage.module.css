@@ -1,0 +1,139 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.backBtn {
+  padding: 0.75rem 1.5rem;
+  background-color: #1D4E34;
+  color: #FFEFDB;
+  border: none;
+  border-radius: 8px;
+  font-family: "DM Mono", monospace;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.backBtn:hover {
+  background-color: #073c23;
+}
+
+
+.emptyState {
+  text-align: center;
+  font-size: 1.1rem;
+  padding: 2rem;
+  font-family: "DM Mono", monospace;
+}
+
+.recipeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.recipeCard {
+  background-color: #FFEFDB;
+  border: 2px solid #1D4E34;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.recipeCard:hover {
+  transform: translateY(-5px);
+}
+
+.image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 2px solid #1D4E34;
+}
+
+.cardContent {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.cardContent h3 {
+  font-family: "DM Mono", monospace;
+  color: #1D4E34;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: #073c23;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+}
+
+.expandBtn {
+  background-color: #1D4E34;
+  color: #FFEFDB;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "DM Mono", monospace;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.expandBtn:hover {
+  background-color: #073c23;
+}
+
+.expandedContent {
+  background-color: #FFEFDB;
+  padding: 1rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  border-left: 6px solid #1D4E34;
+}
+
+.expandedContent h4 {
+  font-family: "DM Mono", monospace;
+  color: #1D4E34;
+  margin: 0 0 0.5rem 0;
+}
+
+p {
+  font-family: "DM Mono", monospace;
+  color: #1D4E34;
+}
+
+.expandedContent p {
+  font-family: "DM Mono", monospace;
+  color: #1D4E34;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.deleteBtn {
+  background-color: #b83420;
+  color: #FFEFDB;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "DM Mono", monospace;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.deleteBtn:hover {
+   background-color: #91210f;
+}

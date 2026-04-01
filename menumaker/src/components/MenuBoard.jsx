@@ -96,7 +96,7 @@ function MenuBoard({ recipes, onDelete, onEdit }) {
                               {truncateText(recipe.ingredients, 40)}
                             </p>
                             <button onClick={() => handleEdit(recipe)}>Edit</button>
-                            <button onClick={() => onDelete(recipe.id)}>Delete</button>
+                            <button  className={styles.deleteBtn} onClick={() => onDelete(recipe.id)}>Delete</button>
                           </>
                         )}
                       </div>

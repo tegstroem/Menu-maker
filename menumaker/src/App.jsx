@@ -6,7 +6,8 @@ import RecipeForm from "./components/RecipeForm";
 import RecipeSelect from "./components/RecipeSelect";
 import MenuBoard from "./components/MenuBoard";
 import SavedMenus from "./components/SavedMenus";
-
+import InspirationPage from "./pages/InspirationPage";
+import RecipesPage from "./pages/RecipesPage";
 
 function App() {
   const [recipes, setRecipes] = useState(() => {
@@ -41,9 +42,21 @@ function App() {
           }
         />
         <Route
+          path="/recipes"
+          element={
+            <RecipesPage recipes={recipes} setRecipes={setRecipes} />
+          }
+        />
+        <Route
           path="/menus"
           element={
             <SavedMenus menus={menus} setMenus={setMenus} />
+          }
+        />
+        <Route
+          path="/inspiration"
+          element={
+            <InspirationPage addRecipe={(newRecipe) => setRecipes([...recipes, newRecipe])} />
           }
         />
       </Routes>
@@ -56,7 +69,13 @@ function HomePage({ recipes, setRecipes, menus, setMenus }) {
   };
 
   const deleteRecipe = (id) => {
+    // Only remove from current menu display, NOT from recipes collection
     setRecipes(recipes.filter(recipe => recipe.id !== id));
+  };
+
+  const removeFromMenu = (id) => {
+    // This removes from the MenuBoard view only
+    // Recipe stays in recipes collection
   };
 
   const editRecipe = (id, updatedRecipe) => {
@@ -99,11 +118,15 @@ function HomePage({ recipes, setRecipes, menus, setMenus }) {
     <DragDropContext onDragEnd={onDragEnd}>
       <header> 
         <h1>MENU MAKER</h1>
-        <h2>RECIPES</h2>
+        <Link to="/recipes" style={{ textDecoration: "none" }}>
+          <h2>RECIPES</h2>
+        </Link>
         <Link to="/menus" style={{ textDecoration: "none" }}>
           <h2>MENUS</h2>
         </Link>
-        <h2>INSPIRATION</h2>
+        <Link to="/inspiration" style={{ textDecoration: "none" }}>
+          <h2>INSPIRATION</h2>
+        </Link>
       </header>
       <div className="container">
         <section className="Recipeform">
@@ -117,7 +140,7 @@ function HomePage({ recipes, setRecipes, menus, setMenus }) {
       <button onClick={saveMenu} style={{ margin: "2rem auto", display: "block", padding: "0.75rem 2rem" }}>
         Save Menu
       </button>
-      <MenuBoard recipes={recipes} onDelete={deleteRecipe} onEdit={editRecipe} />
+      <MenuBoard recipes={recipes} onDelete={removeFromMenu} onEdit={editRecipe} />
     </DragDropContext>
   );
 }

@@ -7,7 +7,7 @@ function RecipeItem({ title, ingredients, description, day, onDelete, id }) {
       <p>{ingredients}</p>
       <p>{description}</p>
       <p>{day}</p>
-      <button onClick={() => onDelete(id)}>Delete</button>
+      <button className={styles.deleteBtn} onClick={() => onDelete(id)}>Delete</button>
     </section>
   );
 }

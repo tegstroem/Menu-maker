@@ -16,7 +16,7 @@ function SavedMenus({ menus, setMenus }) {
       </Link>
       <h1>Saved Menus</h1>
       {menus.length === 0 ? (
-        <p>No saved menus yet</p>
+        <h3>No saved menus yet</h3>
       ) : (
         <div className={styles.menusList}>
           {menus.map(menu => (

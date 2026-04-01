@@ -57,11 +57,10 @@ p {
   font-size: 0.5em;
   padding: 0.2rem 0.5rem;
   font-family: "DM Mono", monospace;
-  color: #FFEFDB;
-  background-color: #1D4E34;
   position: relative;
   margin-top: 0.5em;
-  
+  gap: 1em;
+  border-radius: 5px;
 }
 
 input {
@@ -106,4 +105,20 @@ img {
 
 .expandBtn:hover {
   background-color: #073c23;
+}
+
+.deleteBtn {
+  background-color: #b83420;
+  color: #FFEFDB;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "DM Mono", monospace;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.deleteBtn:hover {
+   background-color: #91210f;
 }
