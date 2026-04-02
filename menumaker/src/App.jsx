@@ -1,6 +1,6 @@
 import "./index.css";
 import { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { DragDropContext } from "@hello-pangea/dnd";
 import RecipeForm from "./components/RecipeForm";
 import RecipeSelect from "./components/RecipeSelect";
@@ -29,6 +29,7 @@ function App() {
   }, [menus]);
 
   return (
+    <Router basename="/menu-maker/">
       <Routes>
         <Route
           path="/"
@@ -60,6 +61,7 @@ function App() {
           }
         />
       </Routes>
+    </Router>
   );
 }
 
