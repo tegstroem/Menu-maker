@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://tegstroem.github.io/menu-maker",
+  "homepage": "https://tegstroem.github.io/Menu-maker",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
