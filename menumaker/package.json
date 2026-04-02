@@ -3,12 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-"scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "deploy": "npm run build && gh-pages -d dist",
-  "test": "echo \"Error: no test specified\" && exit 1"
-},
+  
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "deploy": "npm run build && gh-pages -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
     "react": "^18.2.0",
