@@ -29,7 +29,7 @@ function App() {
   }, [menus]);
 
   return (
-    <Router basename="/Menu-maker/">
+    <Router basename="/Menu-maker">
       <Routes>
         <Route
           path="/"
