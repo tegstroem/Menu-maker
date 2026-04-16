@@ -6,8 +6,8 @@
 
 .backBtn {
   padding: 0.75rem 1.5rem;
-  background-color: #1D4E34;
-  color: #FFEFDB;
+  background-color: #1d4e34;
+  color: #ffefdb;
   border: none;
   border-radius: 8px;
   font-family: "DM Mono", monospace;
@@ -20,7 +20,6 @@
 .backBtn:hover {
   background-color: #073c23;
 }
-
 
 .emptyState {
   text-align: center;
@@ -36,8 +35,8 @@
 }
 
 .recipeCard {
-  background-color: #FFEFDB;
-  border: 2px solid #1D4E34;
+  background-color: #ffefdb;
+  border: 2px solid #1d4e34;
   border-radius: 10px;
   overflow: hidden;
   display: flex;
@@ -53,7 +52,7 @@
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-bottom: 2px solid #1D4E34;
+  border-bottom: 2px solid #1d4e34;
 }
 
 .cardContent {
@@ -65,7 +64,7 @@
 
 .cardContent h3 {
   font-family: "DM Mono", monospace;
-  color: #1D4E34;
+  color: #1d4e34;
   margin: 0 0 0.5rem 0;
   font-size: 1.2rem;
 }
@@ -79,8 +78,8 @@
 }
 
 .expandBtn {
-  background-color: #1D4E34;
-  color: #FFEFDB;
+  background-color: #1d4e34;
+  color: #ffefdb;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -96,27 +95,30 @@
 }
 
 .expandedContent {
-  background-color: #FFEFDB;
+  background-color: #ffefdb;
   padding: 1rem;
   border-radius: 5px;
   margin-bottom: 1rem;
-  border-left: 6px solid #1D4E34;
+  border-left: 6px solid #1d4e34;
 }
 
 .expandedContent h4 {
   font-family: "DM Mono", monospace;
-  color: #1D4E34;
+  color: #1d4e34;
   margin: 0 0 0.5rem 0;
 }
 
+/* REVIEW: BUG — Bare element selector `p` in a CSS Module. CSS Modules only
+   scope class-based selectors; this `p` rule will leak globally and affect
+   ALL <p> elements across the entire app. Scope it: .cardContent p { ... } */
 p {
   font-family: "DM Mono", monospace;
-  color: #1D4E34;
+  color: #1d4e34;
 }
 
 .expandedContent p {
   font-family: "DM Mono", monospace;
-  color: #1D4E34;
+  color: #1d4e34;
   font-size: 0.9rem;
   margin: 0;
   line-height: 1.4;
@@ -124,7 +126,7 @@ p {
 
 .deleteBtn {
   background-color: #b83420;
-  color: #FFEFDB;
+  color: #ffefdb;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -135,5 +137,5 @@ p {
 }
 
 .deleteBtn:hover {
-   background-color: #91210f;
+  background-color: #91210f;
 }

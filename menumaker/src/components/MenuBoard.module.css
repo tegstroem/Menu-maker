@@ -11,27 +11,31 @@
 }
 
 .dayColumn {
-  background-color: #1D4E34;
-  border:#104027 2px solid;  
+  background-color: #1d4e34;
+  border: #104027 2px solid;
   padding: 10px;
   width: 9em;
   max-height: fit-content;
   border-radius: 10px;
 }
 
+/* REVIEW: BUG — h2, h3, h4, p, input, and img below are ALL bare element
+   selectors in a CSS Module. CSS Modules do NOT scope element selectors — they
+   only scope class names. Every one of these rules leaks globally and overrides
+   styles for ALL matching elements across the entire app. This is likely the
+   source of many styling conflicts. Scope them: .dayColumn h2, .recipeItem h3, etc. */
 h2 {
   font-family: "DM Mono", monospace;
   font-size: 1.3em;
-  color: #FFEFDB;
+  color: #ffefdb;
   text-align: center;
   gap: 6em;
 }
 
 h3 {
-font-family: "DM Mono", monospace;
-font-size: 1em;
-margin: 0;
-
+  font-family: "DM Mono", monospace;
+  font-size: 1em;
+  margin: 0;
 }
 
 h4 {
@@ -46,8 +50,8 @@ p {
 }
 
 .recipeItem {
-  background-color: #FFEFDB;
-  border: #1D4E34 1px solid;
+  background-color: #ffefdb;
+  border: #1d4e34 1px solid;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -63,11 +67,14 @@ p {
   border-radius: 5px;
 }
 
+/* REVIEW: padding is declared twice — padding: 0.8em is immediately overridden
+   by padding: 0.2rem 0.5rem. Remove the first one. Also a bare element selector
+   (see note above). */
 input {
   font-size: 0.5em;
-  background-color: #FFEFDB;
-  color: #1D4E34;
-  border: #1D4E34 1px solid;
+  background-color: #ffefdb;
+  color: #1d4e34;
+  border: #1d4e34 1px solid;
   border-radius: 10px;
   padding: 0.8em;
   display: flex;
@@ -76,7 +83,7 @@ input {
 }
 
 img {
-  border: #1D4E34 1px solid;
+  border: #1d4e34 1px solid;
   border-radius: 10px;
   margin: 0.2em;
 }
@@ -95,8 +102,8 @@ img {
 .expandBtn {
   font-size: 0.7em;
   padding: 0.3rem 0.5rem;
-  background-color: #1D4E34;
-  color: #FFEFDB;
+  background-color: #1d4e34;
+  color: #ffefdb;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -109,7 +116,7 @@ img {
 
 .deleteBtn {
   background-color: #b83420;
-  color: #FFEFDB;
+  color: #ffefdb;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;
@@ -120,5 +127,5 @@ img {
 }
 
 .deleteBtn:hover {
-   background-color: #91210f;
+  background-color: #91210f;
 }
