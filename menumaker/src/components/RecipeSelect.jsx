@@ -111,6 +111,10 @@ function RecipeSelect({ onSelectRecipe }) {
                   <img src={meal.strMealThumb} alt={meal.strMeal} />
                   <h4>{meal.strMeal}</h4>
 
+                  {/* REVIEW: Days that already have a recipe assigned should either
+                      be disabled or hidden in this dropdown so the user can't
+                      accidentally double-book a day. Alternatively, show a
+                      confirmation if a day already has a recipe before overwriting. */}
                   <select
                     className={styles.input}
                     value={selectedDay}
