@@ -2,6 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <!-- REVIEW: BUG — The favicon references ./src/files/chef_hat.svg but Vite
+         doesn't serve the src folder directly in production builds. After running
+         `npm run build`, this favicon will be a broken link. Move the SVG to
+         the public/ folder and reference it as /chef_hat.svg instead. -->
     <link rel="icon" type="image/svg+xml" href="./src/files/chef_hat.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MENUMAKER</title>

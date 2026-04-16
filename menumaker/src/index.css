@@ -1,9 +1,12 @@
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap");
 
 /* FONTS */
 
+/* REVIEW: These two rules both use the class name .dm-mono-regular, but the second
+   sets font-style: italic. The second rule silently overrides the first, so
+   .dm-mono-regular always renders italic. If you need both variants, rename the
+   second to .dm-mono-italic. */
 .dm-mono-regular {
   font-family: "DM Mono", monospace;
   font-weight: 400;
@@ -22,9 +25,12 @@
   font-style: normal;
 }
 
-
 /* BACKGROUND */
 
+/* REVIEW: height: 100vh and min-height: 100vh together means the body won't
+   grow beyond the viewport. Content that overflows will be cut off or only
+   scrollable inside child containers. Use min-height: 100vh alone (remove height)
+   so the body can expand with its content. */
 body {
   margin: 0;
   padding: 0;
@@ -58,7 +64,7 @@ h1 {
   font-family: "Leckerli One";
   font-size: 3em;
   font-weight: 500;
-  color:#073c23;
+  color: #073c23;
   text-align: left;
 }
 
@@ -66,6 +72,8 @@ header h1 {
   margin-right: auto;
 }
 
+/* REVIEW: header h2 is defined twice — this first rule is immediately
+   overridden by the second one below. Merge them into a single rule. */
 header h2 {
   margin-right: 3rem;
 }
@@ -74,20 +82,19 @@ header h2 {
   font-family: "Leckerli One";
   font-size: 2em;
   font-weight: 500;
-  color:#073c23;
+  color: #073c23;
   text-align: right;
   gap: 6em;
-
 }
 
 h3 {
   font-family: "DM Mono", monospace;
-  color:#1D4E34;
+  color: #1d4e34;
 }
 
 p {
   font-family: "DM Mono", monospace;
-  color:#1D4E34;
+  color: #1d4e34;
 }
 
 /* PARTS */
@@ -103,9 +110,12 @@ p {
   margin: 0 auto;
 }
 
+/* REVIEW: This styles ALL <section> elements globally. Any future <section>
+   in the app (including ones in third-party libraries) will inherit this
+   background, border, and padding. Scope it to a class like .content-section. */
 section {
-  background-color: #FFEFDB;
-  border:#1D4E34 2px solid;
+  background-color: #ffefdb;
+  border: #1d4e34 2px solid;
   border-radius: 10px;
   gap: 2rem;
   padding: 1rem;
@@ -123,12 +133,16 @@ section {
 
 button {
   font-family: "DM Mono", monospace;
-  color: #FFEFDB;
-  background-color: #1D4E34;
+  color: #ffefdb;
+  background-color: #1d4e34;
   border-radius: 5px;
   padding: 0.5rem 1rem;
 }
 
+/* REVIEW: BUG — This adds 1em padding to EVERY <div> in the entire app,
+   including drag-and-drop library containers, modal wrappers, and any third-party
+   components. This is almost certainly causing unintended spacing throughout
+   the app. Remove this and add padding to specific classes that need it. */
 div {
   padding: 1em;
 }
@@ -144,6 +158,8 @@ div {
     width: 100%;
   }
 
+  /* REVIEW: BUG — This path changed to url(./Background.png) but the image
+     is at ./files/Background.png. The background will be missing on mobile. */
   body {
     background-image: url(./Background.png);
     background-repeat: no-repeat;
