@@ -1,0 +1,136 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #ffefdb;
+  border-bottom: 2px solid #1d4e34;
+  border-radius: 10px;
+  position: relative;
+}
+
+.logo {
+  font-family: "Leckerli One", cursive;
+  font-size: 2rem;
+  color: #073c23;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* Desktop Navigation */
+.navDesktop {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.navDesktop a {
+  font-family: "DM Mono", monospace;
+  color: #073c23;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navDesktop a:hover {
+  color: #1d4e34;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #073c23;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* Mobile Navigation */
+.navMobile {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #ffefdb;
+  border-bottom: 2px solid #1d4e34;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navMobile a {
+  font-family: "DM Mono", monospace;
+  color: #073c23;
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #f0e0c8;
+  transition: background-color 0.3s ease;
+}
+
+.navMobile a:last-child {
+  border-bottom: none;
+}
+
+.navMobile a:hover {
+  background-color: #f0e0c8;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .navDesktop {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .header {
+    padding: 1rem;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 0.75rem;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .navMobile a {
+    padding: 0.75rem 1rem;
+  }
+}

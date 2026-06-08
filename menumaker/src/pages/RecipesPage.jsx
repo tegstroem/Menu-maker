@@ -1,13 +1,20 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./RecipesPage.module.css";
 
 function RecipesPage({ recipes, setRecipes }) {
   const [expandedId, setExpandedId] = useState(null);
+  const navigate = useNavigate();
 
-  const deleteRecipe = (id) => {
-    const updatedRecipes = recipes.filter((recipe) => recipe.id !== id);
-    setRecipes(updatedRecipes);
+  const deleteRecipe = (id, title) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${title}"? This action cannot be undone.`
+    );
+
+    if (confirmed) {
+      const updatedRecipes = recipes.filter((recipe) => recipe.id !== id);
+      setRecipes(updatedRecipes);
+    }
   };
 
   const toggleExpand = (id) => {
@@ -16,13 +23,12 @@ function RecipesPage({ recipes, setRecipes }) {
 
   return (
     <div className={styles.container}>
-      {/* REVIEW: Nesting <button> inside <Link> (which renders an <a>) is invalid
-          HTML — interactive elements must not be nested. Screen readers and keyboard
-          navigation will behave unpredictably. Style the <Link> itself as a button,
-          or use useNavigate() with a plain <button onClick>. */}
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <button className={styles.backBtn}>← Back to Home</button>
-      </Link>
+      <button 
+        onClick={() => navigate("/")} 
+        className={styles.backBtn}
+      >
+        ← Back to Home
+      </button>
 
       <h1>MY RECIPES</h1>
 
@@ -59,11 +65,8 @@ function RecipesPage({ recipes, setRecipes }) {
                   </div>
                 )}
 
-                {/* REVIEW: Deleting is instant and irreversible — no confirmation
-                    dialog or undo option. Add a confirmation step (e.g. "Are you sure?")
-                    before removing the recipe. */}
                 <button
-                  onClick={() => deleteRecipe(recipe.id)}
+                  onClick={() => deleteRecipe(recipe.id, recipe.title)}
                   className={styles.deleteBtn}
                 >
                   Delete

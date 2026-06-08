@@ -134,3 +134,23 @@
 .backBtn:hover {
   background-color: #073c23;
 }
+
+
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: #4caf50;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+@media (max-width: 480px) {
+  .toast {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}

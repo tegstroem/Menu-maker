@@ -1,25 +1,22 @@
-// REVIEW: useState and useEffect are imported but neither is used in this
-// component. Remove unused imports to keep the code clean.
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./SavedMenus.module.css";
 
 function SavedMenus({ menus, setMenus }) {
-  // REVIEW: Same redundant localStorage.setItem issue as deleteRecipe in App.jsx.
-  // The useEffect in App already syncs menus to localStorage. Remove the manual write.
-  const deleteMenu = (id) => {
-    const updatedMenus = menus.filter((menu) => menu.id !== id);
-    setMenus(updatedMenus);
-    localStorage.setItem("menus", JSON.stringify(updatedMenus));
+  const deleteMenu = (id, menuName) => {
+    const confirmed = window.confirm(
+      `Are you sure you want to delete "${menuName}"? This action cannot be undone.`
+    );
+
+    if (confirmed) {
+      const updatedMenus = menus.filter((menu) => menu.id !== id);
+      setMenus(updatedMenus);
+    }
   };
 
   return (
     <div className={styles.container}>
-      {/* REVIEW: Same invalid HTML issue — <button> nested inside <Link> (an <a>).
-          Also, the button text says "+ Create New Menu" but it navigates to the home
-          page. The label is misleading — it implies creating a menu, not going home. */}
-      <Link to="/" style={{ textDecoration: "none" }}>
-        <button className={styles.backBtn}>+ Create New Menu</button>
+      <Link to="/" className={styles.backBtn}>
+        ← Back to home
       </Link>
       <h1>Saved Menus</h1>
       {menus.length === 0 ? (
@@ -35,15 +32,19 @@ function SavedMenus({ menus, setMenus }) {
                 {menu.recipes.map((recipe) => (
                   <div key={recipe.id} className={styles.recipeItem}>
                     {recipe.image && (
-                      <img src={recipe.image} alt={recipe.title} />
+                      <img
+                        src={recipe.image}
+                        alt={recipe.title}
+                        className={styles.recipeImage}
+                      />
                     )}
                     <h3>{recipe.title}</h3>
-                    <p>{recipe.day}</p>
+                    <p className={styles.day}>{recipe.day}</p>
                   </div>
                 ))}
               </div>
               <button
-                onClick={() => deleteMenu(menu.id)}
+                onClick={() => deleteMenu(menu.id, menu.name)}
                 className={styles.deleteBtn}
               >
                 Delete Menu

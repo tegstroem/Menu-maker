@@ -30,10 +30,8 @@ function MenuBoard({ recipes, onDelete, onEdit }) {
     setEditData({});
   };
 
-  // REVIEW: BUG — truncateText crashes if `text` is undefined or null (calling
-  // .length on undefined throws a TypeError). User-created recipes can have empty
-  // description/ingredients fields. Add a guard: if (!text) return "";
   const truncateText = (text, length) => {
+    if (!text) return "";
     return text.length > length ? text.substring(0, length) + "..." : text;
   };
 
@@ -64,12 +62,10 @@ function MenuBoard({ recipes, onDelete, onEdit }) {
                         {...provided.dragHandleProps}
                         className={styles.recipeItem}
                       >
-                        {/* REVIEW: Edit inputs have no <label> elements — screen readers
-                            can't identify what each field is for. Add labels or aria-label
-                            attributes for accessibility. */}
+                        {}
                         {editingId === recipe.id ? (
                           <>
-                            <input
+                            <input aria-label="Title" 
                               value={editData.title || ""}
                               onChange={(e) =>
                                 setEditData({
@@ -79,7 +75,7 @@ function MenuBoard({ recipes, onDelete, onEdit }) {
                               }
                               placeholder="Title"
                             />
-                            <input
+                            <input aria-label="Description" 
                               value={editData.description || ""}
                               onChange={(e) =>
                                 setEditData({
@@ -89,7 +85,7 @@ function MenuBoard({ recipes, onDelete, onEdit }) {
                               }
                               placeholder="Description"
                             />
-                            <input
+                            <input aria-label="Ingredients" 
                               value={editData.ingredients || ""}
                               onChange={(e) =>
                                 setEditData({
@@ -121,9 +117,7 @@ function MenuBoard({ recipes, onDelete, onEdit }) {
                                 ? recipe.description
                                 : truncateText(recipe.description, 50)}
                             </p>
-                            {/* REVIEW: recipe.description?.length — same null safety issue.
-                            If description is undefined this crashes. Use optional chaining. */}
-                            {recipe.description.length > 50 && (
+                            {recipe.description?.length > 50 && (
                               <button
                                 className={styles.expandBtn}
                                 onClick={() =>
@@ -164,5 +158,6 @@ function MenuBoard({ recipes, onDelete, onEdit }) {
     </div>
   );
 }
+
 
 export default MenuBoard;

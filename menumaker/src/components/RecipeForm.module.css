@@ -11,10 +11,6 @@
   justify-self: center;
 }
 
-/* REVIEW: .form input and .input below define overlapping styles for the same
-   elements with different padding values (1rem 3rem vs 1rem 2rem). Pick one
-   approach — either use .form input to style all inputs in the form, or use
-   the .input class applied to each element, but not both. */
 .form input {
   font-family: "DM Mono", monospace;
   color: #1d4e34;
@@ -54,11 +50,8 @@ select.input option:hover {
   color: #ffefdb;
 }
 
-/* REVIEW: BUG — button, h3, and p are bare element selectors in a CSS Module.
-   CSS Modules only scope class selectors, so these rules leak globally and
-   override styles across the entire app. Scope them to a class like .form button,
-   .form h3, etc. Also: h3 declares color:#1D4E34 twice (duplicate property). */
-button {
+
+.RecipeForm button {
   font-family: "DM Mono", monospace;
   color: #ffefdb;
   background-color: #1d4e34;
@@ -67,7 +60,7 @@ button {
   border: #1d4e34 2px solid;
 }
 
-h3 {
+.RecipeForm h3 {
   font-weight: 500;
   font-size: 1em;
   color: #1d4e34;
@@ -75,7 +68,7 @@ h3 {
   color: #1d4e34;
 }
 
-p {
+.RecipeForm p {
   font-family: "DM Mono", monospace;
   color: #1d4e34;
 }
@@ -85,12 +78,12 @@ p {
   opacity: 0.7;
 }
 
-.formTitle {
+label {
   font-family: "DM Mono", monospace;
   color: #1d4e34;
-  text-align: center;
+  text-align: left;
   margin-top: 0;
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 /* Mobile version */

@@ -1,17 +1,14 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./RecipeSelect.module.css";
 
-function RecipeSelect({ onSelectRecipe }) {
+function RecipeSelect({ onSelectRecipe, assignedDays = [] }) {
   const [recipes, setRecipes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
-  // REVIEW: BUG — There's a single selectedDay state shared across ALL recipe cards
-  // in the modal. Changing the day dropdown on one card changes it for every card.
-  // Each card needs independent day selection — either store selected days per
-  // recipe ID (e.g. a Map/object), or move the day selector into a child component
-  // with its own local state.
-  const [selectedDay, setSelectedDay] = useState("");
+  const [selectedDays, setSelectedDays] = useState({}); // Map recipe ID to day
   const [showModal, setShowModal] = useState(false);
+  const [validationError, setValidationError] = useState("");
+  const modalRef = useRef(null);
 
   const days = [
     "MONDAY",
@@ -26,6 +23,7 @@ function RecipeSelect({ onSelectRecipe }) {
   const getRecipe = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setValidationError("");
 
     try {
       const api_call = await fetch(
@@ -34,22 +32,28 @@ function RecipeSelect({ onSelectRecipe }) {
       const data = await api_call.json();
       setRecipes(data.meals || []);
       setShowModal(true);
-      // REVIEW: console.log left in production code. Remove debug logs before shipping.
-      console.log(data);
     } catch (error) {
       console.error("Error fetching recipes:", error);
       setRecipes([]);
+      setValidationError("Failed to fetch recipes. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   const handleSelectRecipe = (meal) => {
-    // REVIEW: alert() is a blocking browser dialog. Use inline validation
-    // messaging instead (e.g. highlight the dropdown, show an error message).
+    const selectedDay = selectedDays[meal.idMeal];
+
     if (!selectedDay) {
-      alert("Please select a day first!");
+      setValidationError(`Please select a day for "${meal.strMeal}"`);
       return;
+    }
+
+    if (assignedDays.includes(selectedDay)) {
+      const confirmed = window.confirm(
+        `${selectedDay} already has a recipe. Do you want to replace it?`
+      );
+      if (!confirmed) return;
     }
 
     const newRecipe = {
@@ -62,15 +66,39 @@ function RecipeSelect({ onSelectRecipe }) {
     };
 
     onSelectRecipe(newRecipe);
-    setSelectedDay("");
+    setSelectedDays({});
     setSearchTerm("");
     setRecipes([]);
     setShowModal(false);
+    setValidationError("");
   };
 
   const closeModal = () => {
     setShowModal(false);
     setRecipes([]);
+    setValidationError("");
+  };
+
+  // Handle Escape key
+  useEffect(() => {
+    const handleEscape = (e) => {
+      if (e.key === "Escape" && showModal) {
+        closeModal();
+      }
+    };
+
+    if (showModal) {
+      document.addEventListener("keydown", handleEscape);
+      modalRef.current?.focus();
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [showModal]);
+
+  const getAvailableDays = () => {
+    return days.filter((day) => !assignedDays.includes(day));
   };
 
   return (
@@ -90,38 +118,54 @@ function RecipeSelect({ onSelectRecipe }) {
 
       {loading && <p>Loading...</p>}
 
-      {/* REVIEW: The modal has no keyboard support — pressing Escape doesn't close
-          it, there's no focus trap, and focus isn't returned to the trigger element
-          on close. Add an onKeyDown handler for Escape, trap focus inside the modal
-          while open, and add role="dialog" and aria-modal="true".
-          Also, the close button (✕) overlaps the "Search Results" heading text,
-          and the modal isn't wide enough for the recipe grid — cards get cramped.
-          Give the heading padding-right to clear the button, and increase the
-          modal's max-width or min-width so cards have room to breathe. */}
       {showModal && (
-        <div className={styles.modalOverlay} onClick={closeModal}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.closeBtn} onClick={closeModal}>
+        <div
+          className={styles.modalOverlay}
+          onClick={closeModal}
+          role="presentation"
+        >
+          <div
+            className={styles.modal}
+            onClick={(e) => e.stopPropagation()}
+            role="dialog"
+            aria-modal="true"
+            ref={modalRef}
+            tabIndex={-1}
+          >
+            <button
+              className={styles.closeBtn}
+              onClick={closeModal}
+              aria-label="Close modal"
+            >
               ✕
             </button>
-            <h2>Search Results</h2>
+            <h2 className={styles.modalTitle}>Search Results</h2>
+
+            {validationError && (
+              <div className={styles.validationError} role="alert">
+                {validationError}
+              </div>
+            )}
+
             <div className={styles.recipesGrid}>
               {recipes.map((meal) => (
                 <div key={meal.idMeal} className={styles.recipeCard}>
                   <img src={meal.strMealThumb} alt={meal.strMeal} />
                   <h4>{meal.strMeal}</h4>
 
-                  {/* REVIEW: Days that already have a recipe assigned should either
-                      be disabled or hidden in this dropdown so the user can't
-                      accidentally double-book a day. Alternatively, show a
-                      confirmation if a day already has a recipe before overwriting. */}
                   <select
                     className={styles.input}
-                    value={selectedDay}
-                    onChange={(e) => setSelectedDay(e.target.value)}
+                    value={selectedDays[meal.idMeal] || ""}
+                    onChange={(e) =>
+                      setSelectedDays({
+                        ...selectedDays,
+                        [meal.idMeal]: e.target.value,
+                      })
+                    }
+                    aria-label={`Select day for ${meal.strMeal}`}
                   >
                     <option value="">Choose a day</option>
-                    {days.map((d) => (
+                    {getAvailableDays().map((d) => (
                       <option key={d} value={d}>
                         {d}
                       </option>

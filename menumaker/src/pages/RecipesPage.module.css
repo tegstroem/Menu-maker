@@ -34,6 +34,33 @@
   gap: 2rem;
 }
 
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .recipeGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .backBtn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0.5rem;
+  }
+
+  .recipeGrid {
+    gap: 0.75rem;
+  }
+}
+
 .recipeCard {
   background-color: #ffefdb;
   border: 2px solid #1d4e34;
@@ -55,11 +82,23 @@
   border-bottom: 2px solid #1d4e34;
 }
 
+@media (max-width: 480px) {
+  .image {
+    height: 150px;
+  }
+}
+
 .cardContent {
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+}
+
+@media (max-width: 480px) {
+  .cardContent {
+    padding: 1rem;
+  }
 }
 
 .cardContent h3 {
@@ -69,12 +108,24 @@
   font-size: 1.2rem;
 }
 
+@media (max-width: 480px) {
+  .cardContent h3 {
+    font-size: 1rem;
+  }
+}
+
 .description {
   font-size: 0.95rem;
   color: #073c23;
   line-height: 1.5;
   margin-bottom: 1rem;
   flex-grow: 1;
+}
+
+@media (max-width: 480px) {
+  .description {
+    font-size: 0.85rem;
+  }
 }
 
 .expandBtn {
@@ -88,10 +139,18 @@
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
   transition: background-color 0.3s ease;
+  width: 100%;
 }
 
 .expandBtn:hover {
   background-color: #073c23;
+}
+
+@media (max-width: 480px) {
+  .expandBtn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
 }
 
 .expandedContent {
@@ -108,10 +167,8 @@
   margin: 0 0 0.5rem 0;
 }
 
-/* REVIEW: BUG — Bare element selector `p` in a CSS Module. CSS Modules only
-   scope class-based selectors; this `p` rule will leak globally and affect
-   ALL <p> elements across the entire app. Scope it: .cardContent p { ... } */
-p {
+/* FIXED: Scoped p selector to .cardContent to prevent global CSS leak */
+.cardContent p {
   font-family: "DM Mono", monospace;
   color: #1d4e34;
 }
@@ -124,6 +181,12 @@ p {
   line-height: 1.4;
 }
 
+@media (max-width: 480px) {
+  .expandedContent p {
+    font-size: 0.8rem;
+  }
+}
+
 .deleteBtn {
   background-color: #b83420;
   color: #ffefdb;
@@ -134,8 +197,16 @@ p {
   font-family: "DM Mono", monospace;
   font-size: 0.9rem;
   transition: background-color 0.3s ease;
+  width: 100%;
 }
 
 .deleteBtn:hover {
   background-color: #91210f;
+}
+
+@media (max-width: 480px) {
+  .deleteBtn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
 }

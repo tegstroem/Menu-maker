@@ -3,12 +3,6 @@
 import { useState } from "react";
 import styles from "./RecipeForm.module.css";
 
-// REVIEW: The form has no validation — submitting with all empty fields creates
-// a recipe with blank title, ingredients, and description. At minimum, require
-// a title before allowing submission.
-// REVIEW: None of the inputs have <label> elements. Placeholders disappear on
-// focus and are not accessible alternatives to labels. Add a <label> for each
-// input so screen readers can identify the fields.
 function RecipeForm({ addRecipe }) {
   const [title, setTitle] = useState("");
   const [ingredients, setIngredients] = useState("");
@@ -28,6 +22,11 @@ function RecipeForm({ addRecipe }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (!title.trim()) {
+      alert("Please enter a recipe title.");
+      return;
+    }
+
     const newRecipe = {
       id: Date.now(),
       title,
@@ -35,9 +34,6 @@ function RecipeForm({ addRecipe }) {
       description,
       day,
     };
-
-    // REVIEW: console.log left in production code. Remove debug logs before shipping.
-    console.log(newRecipe);
 
     addRecipe(newRecipe);
     setTitle("");
@@ -50,28 +46,36 @@ function RecipeForm({ addRecipe }) {
     <form onSubmit={handleSubmit} className={styles.form}>
       <h3 className={styles.formTitle}>Add your own recipe</h3>
 
+     
       <input
+        id="recipe-title"
         className={styles.input}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Recipe name"
       />
 
+     
       <input
+        id="recipe-ingredients"
         className={styles.input}
         value={ingredients}
         onChange={(e) => setIngredients(e.target.value)}
         placeholder="Ingredients"
       />
 
+     
       <input
+        id="recipe-description"
         className={styles.input}
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         placeholder="Description"
       />
 
+      
       <select
+        id="recipe-day"
         className={styles.input}
         value={day}
         onChange={(e) => setDay(e.target.value)}
@@ -84,9 +88,7 @@ function RecipeForm({ addRecipe }) {
         ))}
       </select>
 
-      {/* REVIEW: type="Submit" should be lowercase "submit". While browsers are
-          case-insensitive here, the HTML spec requires lowercase values. */}
-      <button type="Submit" className={styles.button}>
+      <button type="submit" className={styles.button}>
         Add
       </button>
     </form>

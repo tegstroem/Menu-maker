@@ -69,3 +69,11 @@
 .deleteBtn:hover {
    background-color: #91210f;
 }
+
+.backBtn {
+  font-family: "DM Mono", monospace;
+  color: #ffefdb;
+  background-color: #1d4e34;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+}
