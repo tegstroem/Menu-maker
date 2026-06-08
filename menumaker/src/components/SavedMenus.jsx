@@ -1,16 +1,23 @@
+// REVIEW: useState and useEffect are imported but neither is used in this
+// component. Remove unused imports to keep the code clean.
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styles from "./SavedMenus.module.css";
 
 function SavedMenus({ menus, setMenus }) {
+  // REVIEW: Same redundant localStorage.setItem issue as deleteRecipe in App.jsx.
+  // The useEffect in App already syncs menus to localStorage. Remove the manual write.
   const deleteMenu = (id) => {
-    const updatedMenus = menus.filter(menu => menu.id !== id);
+    const updatedMenus = menus.filter((menu) => menu.id !== id);
     setMenus(updatedMenus);
     localStorage.setItem("menus", JSON.stringify(updatedMenus));
   };
 
   return (
     <div className={styles.container}>
+      {/* REVIEW: Same invalid HTML issue — <button> nested inside <Link> (an <a>).
+          Also, the button text says "+ Create New Menu" but it navigates to the home
+          page. The label is misleading — it implies creating a menu, not going home. */}
       <Link to="/" style={{ textDecoration: "none" }}>
         <button className={styles.backBtn}>+ Create New Menu</button>
       </Link>
@@ -19,21 +26,26 @@ function SavedMenus({ menus, setMenus }) {
         <h3>No saved menus yet</h3>
       ) : (
         <div className={styles.menusList}>
-          {menus.map(menu => (
+          {menus.map((menu) => (
             <div key={menu.id} className={styles.menuCard}>
               <h2>{menu.name}</h2>
               <p>Created: {menu.createdAt}</p>
               <p>Recipes: {menu.recipes.length}</p>
               <div className={styles.recipes}>
-                {menu.recipes.map(recipe => (
+                {menu.recipes.map((recipe) => (
                   <div key={recipe.id} className={styles.recipeItem}>
-                    {recipe.image && <img src={recipe.image} alt={recipe.title} />}
+                    {recipe.image && (
+                      <img src={recipe.image} alt={recipe.title} />
+                    )}
                     <h3>{recipe.title}</h3>
                     <p>{recipe.day}</p>
                   </div>
                 ))}
               </div>
-              <button onClick={() => deleteMenu(menu.id)} className={styles.deleteBtn}>
+              <button
+                onClick={() => deleteMenu(menu.id)}
+                className={styles.deleteBtn}
+              >
                 Delete Menu
               </button>
             </div>

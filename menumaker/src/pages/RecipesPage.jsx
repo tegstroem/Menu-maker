@@ -6,7 +6,7 @@ function RecipesPage({ recipes, setRecipes }) {
   const [expandedId, setExpandedId] = useState(null);
 
   const deleteRecipe = (id) => {
-    const updatedRecipes = recipes.filter(recipe => recipe.id !== id);
+    const updatedRecipes = recipes.filter((recipe) => recipe.id !== id);
     setRecipes(updatedRecipes);
   };
 
@@ -16,6 +16,10 @@ function RecipesPage({ recipes, setRecipes }) {
 
   return (
     <div className={styles.container}>
+      {/* REVIEW: Nesting <button> inside <Link> (which renders an <a>) is invalid
+          HTML — interactive elements must not be nested. Screen readers and keyboard
+          navigation will behave unpredictably. Style the <Link> itself as a button,
+          or use useNavigate() with a plain <button onClick>. */}
       <Link to="/" style={{ textDecoration: "none" }}>
         <button className={styles.backBtn}>← Back to Home</button>
       </Link>
@@ -23,19 +27,25 @@ function RecipesPage({ recipes, setRecipes }) {
       <h1>MY RECIPES</h1>
 
       {recipes.length === 0 ? (
-        <p className={styles.emptyState}>No recipes yet. Create one to get started!</p>
+        <p className={styles.emptyState}>
+          No recipes yet. Create one to get started!
+        </p>
       ) : (
         <div className={styles.recipeGrid}>
-          {recipes.map(recipe => (
+          {recipes.map((recipe) => (
             <div key={recipe.id} className={styles.recipeCard}>
               {recipe.image && (
-                <img src={recipe.image} alt={recipe.title} className={styles.image} />
+                <img
+                  src={recipe.image}
+                  alt={recipe.title}
+                  className={styles.image}
+                />
               )}
               <div className={styles.cardContent}>
                 <h3>{recipe.title}</h3>
                 <p className={styles.description}>{recipe.description}</p>
-                
-                <button 
+
+                <button
                   onClick={() => toggleExpand(recipe.id)}
                   className={styles.expandBtn}
                 >
@@ -49,7 +59,10 @@ function RecipesPage({ recipes, setRecipes }) {
                   </div>
                 )}
 
-                <button 
+                {/* REVIEW: Deleting is instant and irreversible — no confirmation
+                    dialog or undo option. Add a confirmation step (e.g. "Are you sure?")
+                    before removing the recipe. */}
+                <button
                   onClick={() => deleteRecipe(recipe.id)}
                   className={styles.deleteBtn}
                 >
