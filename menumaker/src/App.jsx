@@ -2,7 +2,7 @@ import "./index.css";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
-import HomePage from "./pages/Homepage";
+import HomePage from "./pages/HomePage";
 import RecipesPage from "./pages/RecipesPage";
 import SavedMenus from "./components/SavedMenus";
 import InspirationPage from "./pages/InspirationPage";

@@ -2,36 +2,37 @@
 
 .container {
   display: flex;
-  margin: 0 auto;
-  column-gap: 1em;
+  flex-direction: row;
   justify-content: center;
-  flex-wrap: wrap;
-  padding: 2rem;
-  max-width: 1400px;
+  gap: 1em;
+  width: 100%;
 }
 
 .dayColumn {
   background-color: #1d4e34;
   border: #104027 2px solid;
   padding: 10px;
-  width: 9em;
-  max-height: fit-content;
+  width: 180px;
+  min-width: 180px;
+  height: auto;
   border-radius: 10px;
+  flex-shrink: 0;
 }
-
 
 .dayColumn h2 {
   font-family: "DM Mono", monospace;
-  font-size: 1.3em;
+  font-size: 1em;
   color: #ffefdb;
   text-align: center;
   gap: 6em;
+  margin: 0 0 0.5em 0;
 }
 
 .dayColumn h3 {
   font-family: "DM Mono", monospace;
-  font-size: 1em;
+  font-size: 0.8em;
   margin: 0;
+  word-wrap: break-word;
 }
 
 .dayColumn h4 {
@@ -43,6 +44,7 @@
 
 .dayColumn p {
   font-size: 0.6em;
+  overflow-wrap: break-word;
 }
 
 .recipeItem {
@@ -52,6 +54,7 @@
   display: flex;
   flex-direction: column;
   padding: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 .recipeItem button {
@@ -64,7 +67,6 @@
   border-radius: 5px;
 }
 
-
 .dayColumn input {
   font-size: 0.5em;
   background-color: #ffefdb;
@@ -74,23 +76,29 @@
   display: flex;
   padding: 0.2rem 0.5rem;
   font-family: "DM Mono", monospace;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .dayColumn img {
   border: #1d4e34 1px solid;
   border-radius: 10px;
   margin: 0.2em;
+  max-width: 100%;
+  height: auto;
 }
 
 .shortDescription {
   font-size: 0.75em;
   margin: 0.5rem 0;
   line-height: 1.3;
+  word-wrap: break-word;
 }
 
 .ingredients {
   font-size: 0.7em;
   margin: 0.3rem 0;
+  word-wrap: break-word;
 }
 
 .expandBtn {
@@ -102,6 +110,7 @@
   border-radius: 5px;
   cursor: pointer;
   margin-bottom: 0.5rem;
+  width: 100%;
 }
 
 .expandBtn:hover {
@@ -118,8 +127,51 @@
   font-family: "DM Mono", monospace;
   font-size: 0.9rem;
   transition: background-color 0.3s ease;
+  width: 100%;
 }
 
 .deleteBtn:hover {
   background-color: #91210f;
+}
+
+@media (max-width: 768px) {
+  .dayColumn {
+    width: 150px;
+    min-width: 150px;
+  }
+
+  .dayColumn h2 {
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+    padding: 0 auto;
+  }
+
+  .dayColumn {
+    width: 90%;
+    max-width: 300px;
+    min-width: 200px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .dayColumn h2 {
+    font-size: 0.8em;
+  }
+
+  .recipeItem {
+    padding: 0.3em;
+  }
+
+  
 }

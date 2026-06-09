@@ -2,13 +2,16 @@
 
 .form {
   background-color: #ffefdb;
-  width: 20rem;
+  height: 400px;
   padding: 2rem;
   margin: 1rem;
   display: grid;
   gap: 1rem;
   border-radius: 10px;
-  justify-self: center;
+  border-bottom: 2px solid #1d4e34;
+  border-right: 2px solid #1d4e34;
+  justify-content: center;
+  
 }
 
 .form input {
@@ -17,8 +20,9 @@
   font-size: 0.7em;
   background-color: #ffefdb;
   border-radius: 10px;
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
   border: #1d4e34 2px solid;
+  justify-self: center;
 }
 
 .input {
@@ -58,6 +62,7 @@ select.input option:hover {
   border-radius: 10px;
   padding: 0.5rem 1rem;
   border: #1d4e34 2px solid;
+
 }
 
 .RecipeForm h3 {

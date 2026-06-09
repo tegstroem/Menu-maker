@@ -1,10 +1,14 @@
 .Recipesearch {
+  display: flex;
+  flex-direction: column;
   padding: 2rem;
-  gap: 1em;
   align-items: center;
   background-color: #FFEFDB;
   margin: 1rem;
   border-radius: 10px;
+  border-bottom: 2px solid #1d4e34;
+  border-right: 2px solid #1d4e34;
+  height: 400px;
 }
 
 .Recipesearch form {
@@ -15,18 +19,18 @@
 }
 
 .Recipesearch input {
-  padding: 0.7rem 3rem;
+  padding: 0.7rem 2rem;
   border: #1D4E34 2px solid;
   border-radius: 10px;
   font-family: "DM Mono", monospace;
-  font-size: 0.9em;
+  font-size: 0.7em;
 
 }
 
-.Recipesearch button {
-  padding: 0.7rem 3rem;
-  background-color: #1D4E34;
-  color: #FFEFDB;
+.submit button {
+  padding: 0.7rem 2rem;
+  background-color: #1d4e34;
+  color:#ffefdb;
   display: grid;
   justify-content: center;
   border: none;
@@ -38,24 +42,7 @@
   background-color: #073c23;
 }
 
-.Recipesearch > div {
-  gap: 1.5rem;
-  width: 100%;
-  justify-content: center;
-}
 
-
-.Recipesearch > div > div {
-  gap: 1rem;
-  display: grid;
-  padding: 1rem;
-  margin: 1rem;
-  background-color: #FFEFDB;
-  border-radius: 10px;
-  border: #1D4E34 1px solid;
-  justify-content: center;
-
-}
 
 .Recipesearch img {
   width: 100%;
@@ -67,11 +54,10 @@
   font-family: "DM Mono", monospace;
   color:#1D4E34;  
   font-size: 0.7em;
-  background-color: #FFEFDB;
   border-radius: 10px;
   padding: 0.5rem 2rem;
   margin-bottom: 1em;
-  border:#1D4E34 2px solid;
+  border: #1D4E34 2px solid;
 }
 
 .Recipesearch h3 {
@@ -149,6 +135,7 @@
   background: #FFEFDB;
   border-radius: 10px;
   border: #1D4E34 1px solid;
+  font-family: "DM Mono", monospace;
 }
 
 .recipeCard img {
@@ -164,6 +151,148 @@
   text-align: center;
 }
 
+.suggestionBox {
+  background-color:#1D4E34;
+  border: 2px solid #073c23;
+  border-radius: 10px;
+  padding: 1em 1em 4em 1em;
+  margin: 1em;
+  text-align: center;
+  max-height: 200px;
+  max-width: 80%;
+  overflow: visible;
+  
+}
+
+.suggestionTitle {
+  font-family: "DM Mono", monospace;
+  color:#FFEFDB;
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+}
+
+.suggestionImage {
+  width: 100%;
+  max-width: 200px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #1d4e34;
+}
+
+.suggestionMealName {
+  font-family: "DM Mono", monospace;
+  color:#FFEFDB;
+  margin: 0.5rem 0;
+  font-size: 0.95rem;
+  font-weight: bold;
+}
+
+.suggestionCategory {
+  font-family: "DM Mono", monospace;
+   color:#FFEFDB;
+  font-size: 0.5rem;
+  margin: 0.3rem 0 0.75rem 0;
+}
+
+.suggestionButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.addSuggestionBtn,
+.refreshSuggestionBtn {
+  padding: 0.5rem 1rem;
+  background-color: #ffefdb;
+  color: #1d4e34;
+  border: none;
+  border-radius: 10px;
+  font-family: "DM Mono", monospace;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+
+.addSuggestionBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  color: #666;
+}
+
+.refreshSuggestionBtn {
+  background-color: #b83420;
+  color: #ffefdb;
+}
+
+.refreshSuggestionBtn:hover:not(:disabled) {
+  background-color: #91210f;
+}
+
+.refreshSuggestionBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  color: #666;
+}
+
+.daySelect {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #1d4e34;
+  border-radius: 8px;
+  font-family: "DM Mono", monospace;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+  background-color: #ffefdb;
+  color: #1d4e34;
+}
+
+.daySelect:focus {
+  outline: none;
+  border-color: #073c23;
+  box-shadow: 0 0 0 3px rgba(29, 78, 52, 0.1);
+}
+
+.modalButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.confirmBtn,
+.cancelBtn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-family: "DM Mono", monospace;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirmBtn {
+  background-color: #1d4e34;
+  color: #ffefdb;
+}
+
+.confirmBtn:hover {
+  background-color: #073c23;
+}
+
+.cancelBtn {
+  background-color: #ccc;
+  color: #333;
+}
+
+.cancelBtn:hover {
+  background-color: #aaa;
+}
+
 @media (max-width: 768px) {
   .modal {
     max-width: 95vw;
@@ -172,6 +301,42 @@
 
   .recipesGrid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .suggestionBox {
+    padding: 0.75rem;
+  }
+
+  .suggestionImage {
+    max-width: 150px;
+    height: 120px;
+  }
+
+  .suggestionTitle {
+    font-size: 0.9rem;
+  }
+
+  .addSuggestionBtn,
+  .refreshSuggestionBtn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .daySelect {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+    color: #f5c6cb;
+  }
+
+  .modalButtons {
+    flex-direction: column;
+  }
+
+  .confirmBtn,
+  .cancelBtn {
+    width: 100%;
   }
 }
 

@@ -1,6 +1,12 @@
+.menusList {
+ display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 1em;
+  gap: 2em;
+}
+
 .container {
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 1rem;
   margin: 0 auto;
 }
 
@@ -10,22 +16,19 @@
   font-family: "Leckerli One", sans-serif;
 }
 
-.menusList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 2rem;
-}
 
 .menuCard {
   background: #FFEFDB;
   border: #1D4E34 2px solid;
   border-radius: 10px;
   padding: 1.5rem;
+  margin: 1.5em;
 }
 
 .menuCard h2 {
   margin-top: 0;
   color: #1D4E34;
+  font-family: "DM Mono", monospace;
 }
 
 .recipes {
@@ -74,6 +77,7 @@
   font-family: "DM Mono", monospace;
   color: #ffefdb;
   background-color: #1d4e34;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 0.5rem 1rem;
+  margin: 1em;
 }

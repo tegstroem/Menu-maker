@@ -5,9 +5,13 @@ function RecipeSelect({ onSelectRecipe, assignedDays = [] }) {
   const [recipes, setRecipes] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
-  const [selectedDays, setSelectedDays] = useState({}); // Map recipe ID to day
+  const [selectedDays, setSelectedDays] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [validationError, setValidationError] = useState("");
+  const [suggestion, setSuggestion] = useState(null);
+  const [suggestionLoading, setSuggestionLoading] = useState(false);
+  const [showSuggestionModal, setShowSuggestionModal] = useState(false);
+  const [selectedSuggestionDay, setSelectedSuggestionDay] = useState("");
   const modalRef = useRef(null);
 
   const days = [
@@ -20,6 +24,27 @@ function RecipeSelect({ onSelectRecipe, assignedDays = [] }) {
     "SUNDAY",
   ];
 
+  // Fetch a random suggestion on component mount
+  useEffect(() => {
+    fetchSuggestion();
+  }, []);
+
+  const fetchSuggestion = async () => {
+    setSuggestionLoading(true);
+    try {
+      const response = await fetch(
+        "https://www.themealdb.com/api/json/v1/1/random.php"
+      );
+      const data = await response.json();
+      setSuggestion(data.meals?.[0] || null);
+    } catch (error) {
+      console.error("Error fetching suggestion:", error);
+      setSuggestion(null);
+    } finally {
+      setSuggestionLoading(false);
+    }
+  };
+
   const getRecipe = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -27,7 +52,7 @@ function RecipeSelect({ onSelectRecipe, assignedDays = [] }) {
 
     try {
       const api_call = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`,
+        `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`
       );
       const data = await api_call.json();
       setRecipes(data.meals || []);
@@ -73,13 +98,43 @@ function RecipeSelect({ onSelectRecipe, assignedDays = [] }) {
     setValidationError("");
   };
 
+  const handleSuggestionClick = () => {
+    const availableDays = getAvailableDays();
+    if (availableDays.length === 0) {
+      alert("All days are assigned! Remove a recipe first.");
+      return;
+    }
+
+    setShowSuggestionModal(true);
+  };
+
+  const confirmSuggestion = () => {
+    if (!selectedSuggestionDay) {
+      alert("Please select a day");
+      return;
+    }
+
+    const newRecipe = {
+      id: Date.now(),
+      title: suggestion.strMeal,
+      ingredients: suggestion.strIngredients || "No ingredients listed",
+      description: suggestion.strInstructions || "No description available",
+      image: suggestion.strMealThumb,
+      day: selectedSuggestionDay,
+    };
+
+    onSelectRecipe(newRecipe);
+    setSelectedSuggestionDay("");
+    setShowSuggestionModal(false);
+    fetchSuggestion();
+  };
+
   const closeModal = () => {
     setShowModal(false);
     setRecipes([]);
     setValidationError("");
   };
 
-  // Handle Escape key
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === "Escape" && showModal) {
@@ -118,6 +173,89 @@ function RecipeSelect({ onSelectRecipe, assignedDays = [] }) {
 
       {loading && <p>Loading...</p>}
 
+      {/* Suggestion Section */}
+      {suggestion && !showModal && (
+        <div className={styles.suggestionBox}>
+          <h4 className={styles.suggestionTitle}>Today's Suggestion</h4>
+          <img
+            src={suggestion.strMealThumb}
+            alt={suggestion.strMeal}
+            className={styles.suggestionImage}
+          />
+          <h5 className={styles.suggestionMealName}>{suggestion.strMeal}</h5>
+          <p className={styles.suggestionCategory}>
+            {suggestion.strCategory}
+          </p>
+          <div className={styles.suggestionButtons}>
+            <button
+              className={styles.addSuggestionBtn}
+              onClick={handleSuggestionClick}
+              disabled={getAvailableDays().length === 0}
+            >
+              Add
+            </button>
+            <button
+              className={styles.refreshSuggestionBtn}
+              onClick={fetchSuggestion}
+              disabled={suggestionLoading}
+            >
+              {suggestionLoading ? "Loading..." : "New"}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Suggestion Day Selection Modal */}
+      {showSuggestionModal && (
+        <div
+          className={styles.modalOverlay}
+          onClick={() => setShowSuggestionModal(false)}
+        >
+          <div
+            className={styles.modal}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className={styles.closeBtn}
+              onClick={() => setShowSuggestionModal(false)}
+            >
+              ✕
+            </button>
+            <h3 className={styles.modalTitle}>
+              Select a day for {suggestion?.strMeal}
+            </h3>
+
+            <select
+              className={styles.daySelect}
+              value={selectedSuggestionDay}
+              onChange={(e) => setSelectedSuggestionDay(e.target.value)}
+            >
+              <option value="">Choose a day</option>
+              {getAvailableDays().map((day) => (
+                <option key={day} value={day}>
+                  {day}
+                </option>
+              ))}
+            </select>
+
+            <div className={styles.modalButtons}>
+              <button
+                className={styles.confirmBtn}
+                onClick={confirmSuggestion}
+              >
+                Confirm
+              </button>
+              <button
+                className={styles.cancelBtn}
+                onClick={() => setShowSuggestionModal(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {showModal && (
         <div
           className={styles.modalOverlay}
@@ -135,7 +273,7 @@ function RecipeSelect({ onSelectRecipe, assignedDays = [] }) {
             <button
               className={styles.closeBtn}
               onClick={closeModal}
-              aria-label="Close modal"
+              aria-label="Close"
             >
               ✕
             </button>
